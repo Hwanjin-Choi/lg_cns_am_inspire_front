@@ -1,0 +1,14 @@
+<body>
+  <script>
+    let count = true;
+    let ranNum = parseInt(Math.random() * 11);
+    while (count) {
+      let userChoice = prompt("Enter Number");
+      if (parseInt(userChoice) === ranNum) {
+        count = false;
+      } else {
+        parseInt(userChoice) > ranNum ? alert("Smaller") : alert("Bigger");
+      }
+    }
+  </script>
+</body>

@@ -1,0 +1,15 @@
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+  get height() {
+    return this._height;
+  }
+  set height(value) {
+    this._height = value;
+  }
+}
+const rectangle = new Rectangle(10, 20);
+console.log(rectangle);
+console.log(rectangle.height, rectangle.width);

@@ -1,0 +1,23 @@
+<body>
+  <script>
+    let sum = 0;
+    for (let i = 0; i <= 100; i++) {
+      if (i % 2 === 0) {
+        sum += i;
+      }
+    }
+
+    console.log(sum);
+
+    function sequence() {
+      let seq = 0;
+      return function () {
+        return ++seq;
+        console.log(seq);
+      };
+    }
+    const seq = sequence();
+
+    sequence();
+  </script>
+</body>
