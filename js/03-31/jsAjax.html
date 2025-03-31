@@ -1,0 +1,27 @@
+<body>
+  <script>
+    const urlFetch = async () => {
+      let url = "http://ggoreb.com/api/youtube.jsp";
+
+      const res = await fetch(url).then((res) => {
+        return res.json();
+      });
+      let component = "";
+      /*    console.log(res); */
+      /* res.items.forEach((item) => {
+        console.log(item.original_title);
+      });
+ */
+      for (item of res.items) {
+        const snippet = item.snippet;
+        const title = snippet.title;
+        component += title;
+        console.log(title);
+      }
+
+      document.querySelector("div").innerHTML = component;
+    };
+    urlFetch();
+  </script>
+  <div></div>
+</body>

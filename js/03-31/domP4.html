@@ -1,0 +1,25 @@
+<body>
+  검색어 입력 : <input type="text" name="search" />
+</body>
+
+<script>
+  const input = document.querySelector("[name=search]");
+  input.addEventListener("focus", (event) => {
+    let search = event.target.value;
+
+    input.value = `#`;
+  });
+  input.addEventListener("blur", (event) => {
+    if (input.value === "#") {
+      input.value = ``;
+    }
+    let search = event.target.value;
+  });
+  input.addEventListener("keypress", (event) => {
+    const currentTag = input.value;
+    if (event.code === "Space") {
+      event.preventDefault();
+      input.value = `${currentTag}, #`;
+    }
+  });
+</script>

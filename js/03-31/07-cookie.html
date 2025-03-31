@@ -1,0 +1,10 @@
+<body>
+  <script>
+    document.cookie = "name = jin";
+    console.log(document.cookie);
+    const date = new Date();
+    date.setHours(date.getHours() + 10);
+
+    document.cookie = "cookie=jin2;expires=" + date.toUTCString();
+  </script>
+</body>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <script>
+      const addTag = (text) => {
+        return `<h1>${text}</h1>`;
+      };
+    </script>
+    <script>
+      /* document.addEventListener("DOMContentLoaded", () => {
+        document.body.innerHTML += addTag("h1 태그 추가");
+      }); */
+    </script>
+  </head>
+  <body>
+    <script>
+      /* document.addEventListener("DOMContentLoaded", () => {
+        document.body.innerHTML += addTag("h1 태그 추가");
+      }); */
+
+      const h1 = document.createElement("h1");
+      const text = document.createTextNode("제목");
+      h1.appendChild(text);
+      h1.setAttribute("id", "title2");
+
+      document.body.appendChild(h1);
+      //두번째 버전
+      document.body.innerHTML += '<h1 title="title1">Title<h1/>';
+    </script>
+  </body>
+</html>
