@@ -20,7 +20,6 @@ const Nav = (props) => {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const inputRef = useRef(null);
   const addList = () => {
-    const ranNum = parseInt(Math.random() * 100);
     setCurrentIndex(list.length);
     setShow(true);
     setList([...list, edit]);
