@@ -2,21 +2,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import styles from "./App.module.css";
 import Header from "./Header.js";
-function BasicExample() {
-  return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
-  );
-}
+import { useState, useRef } from "react";
+import React from "react";
 
 /* const Header = () => {
   return (
@@ -26,20 +13,96 @@ function BasicExample() {
   );
 }; */
 //esline-disable-next-line
-const Nav = ({ list }) => {
+const Nav = (props) => {
+  const [show, setShow] = useState(false);
+  const [edit, setEdit] = useState("");
+  const [list, setList] = useState(props.list);
+  const [currentIndex, setCurrentIndex] = useState(-1);
+  const inputRef = useRef(null);
+  const addList = () => {
+    const ranNum = parseInt(Math.random() * 100);
+    setCurrentIndex(list.length);
+    setShow(true);
+    setList([...list, edit]);
+  };
+  const deleteList = (index) => {
+    const newList = [...list];
+    newList.splice(index, 1);
+    setList(newList);
+  };
+  const changeText = (e) => {
+    setEdit(e.target.value);
+  };
+  const showEditText = (index) => {
+    if (show) {
+      //수정되고 나서
+      const newList = [...list];
+      newList[index] = edit;
+      setList(newList);
+      setEdit("");
+      setShow(false);
+      setCurrentIndex(-1);
+    } else {
+      //수정 전
+      setEdit(list[index]);
+      setCurrentIndex(index);
+      setShow(true);
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+          inputRef.current.select();
+        }
+      }, 0);
+    }
+  };
+
   const MappedList = () =>
-    list.map((item) => {
-      return <li key={item}>{item}</li>;
+    list.map((item, index) => {
+      return (
+        <React.Fragment key={index}>
+          <li onClick={() => deleteList(index)} key={index}>
+            {item}
+            {currentIndex === -1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  showEditText(index);
+                }}
+              >
+                edit
+              </button>
+            )}
+            {currentIndex === index && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  showEditText(index);
+                }}
+              >
+                save
+              </button>
+            )}
+          </li>
+        </React.Fragment>
+      );
     });
 
   return (
     <nav>
+      <button onClick={() => addList()}>ADD</button>
       <ul>
         <MappedList />
-        <li>
-          <a href="3.html">JavaScript</a>
-        </li>
       </ul>
+      {show && (
+        <input
+          onChange={(e) => {
+            changeText(e);
+          }}
+          type="text"
+          ref={inputRef}
+          value={edit}
+        />
+      )}
     </nav>
   );
 };
@@ -64,14 +127,13 @@ const Avatar = (props) => {
   );
 };
 const Comment = (props) => {
-  console.log(props);
   return (
     <div className="comment">
       <div className="user-info">
         <Avatar {...props} />
         <div className="user-info-name">{props.author.name}</div>
       </div>
-      <div className={styles.title} style={{ "font-size": "2rem" }}>
+      <div className={styles.title} style={{ fontSize: "2rem" }}>
         {props.text}
       </div>
       {/* <div className="comment-date">{formatDate(props.date)}</div> */}
@@ -80,15 +142,15 @@ const Comment = (props) => {
 };
 
 const App = () => {
-  const list = ["HTML", "CSS", "JavaScriptss"];
+  const [list, setList] = useState(["HTML", "CSS", "JavaScriptss"]);
 
   return (
     <div className="App">
       <Header title={"KBO"} desc={"HI"} />
+
       <Header />
       <Nav list={list} />
       <Comment {...commentData} />
-      <BasicExample />
     </div>
   );
 };
