@@ -5,7 +5,7 @@ const Header = (props) => {
   const handleClick = () => {
     setCount((prev) => prev + 1);
   };
-  const factorial = (n) => {
+  /*   const factorial = (n) => {
     if (n == 0) {
       return 0;
     } else if (n == 1) {
@@ -19,7 +19,7 @@ const Header = (props) => {
     let result = factorial(count);
     return result;
   }, []);
-
+ */
   return (
     <div>
       <header>

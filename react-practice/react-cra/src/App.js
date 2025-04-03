@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import styles from "./App.module.css";
-import Header from "./Header.js";
+/* import Header from "./Header.js"; */
 import { useState, useRef } from "react";
 import React from "react";
 
@@ -142,12 +142,26 @@ const Comment = (props) => {
 
 const App = () => {
   const [list, setList] = useState(["HTML", "CSS", "JavaScriptss"]);
-
+  const [toc, setToc] = useState(null);
+  /*  const url = "http://ggoreb.com/api/toc.jsp";
+  
+ */
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(url);
+      const data = await res.json();
+      setToc(data);
+    };
+    fetchData();
+  }, []);
+  const DataList = () => {
+    toc.map((item) => {
+      return <p>{item.title}</p>;
+    });
+  };
   return (
     <div className="App">
-      <Header title={"KBO"} desc={"HI"} />
-
-      <Header />
+      {/* <DataList /> */}
       <Nav list={list} />
       <Comment {...commentData} />
     </div>
